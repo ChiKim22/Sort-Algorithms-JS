@@ -1,35 +1,48 @@
 function heapSort(arr) {
+    // 힙으로 만들기 위해 배열의 인덱스 값 추출
     let a = [...arr];
     let len = a.length;
 
-    const heapify = (arr, i) => {
+    // 힙에서 큰값과, 작은값 비교
+    const heapify = (a, i) => {
+        const small = 2 * i + 1; // 작은 값(왼쪽)
+        const large = 2 * i + 2; // 큰 값(오른쪽)
         let largest = i;
-        let small = 2 * i + 1;
-        let large = 2 * i + 2;
-    
-        if(small < len && arr[largest] > arr[largest]) {
+        
+        // 작은수 검사
+        if(small < len && a[largest] < a[small]) {
             largest = small;
         }
-        if(large < len && arr[largest] > arr[largest]) {
+
+        // 큰수 검사
+        if(large < len && a[largest] < a[large]) {
             largest = large;
         }
-        if(largest != len) {
-            [arr[largest], arr[i]] = [arr[i], arr[largest]];
-        }
-    };
 
-    for(let i = l/2; i >= 0; i--) {
-        heapify(a, i);
-        for(i = a.length - 1; i > 0; i--) {
-            [a[0], a[i]] = [a[i], a[0]];
-            len--;
-            heapify(a, 0);
+        // 값 치환
+        if(largest !== i) {
+            [a[largest], a[i]] = [a[i], a[largest]];
+            heapify(a, largest);
         }
+
+    }; // heapify
+
+    // Math.floor와 반복문으로 배열에서 최대 힙 제작
+    for(let i = Math.floor(len / 2); i >= 0; i-=1){
+        heapify(a, i);
     }
-    return arr;
+    
+    // 힙 정렬
+    for(i = a.length - 1; i > 0; i--) {
+        [a[0], a[i]] = [a[i], a[0]];
+        // 큰값 빼내고 난 후 남은 수들로 힙 재구성
+        len--;
+        heapify(a, 0);
+    }
+    return a;
 };
 
-let arr = [1, 6, 7, 8, 9, 3, 5, 4, 2];
+let value = [1, 6, 7, 8, 9, 3, 5, 4, 2];
 
-console.log(`Original : ${arr}`)
-console.log(`Heap Sorted : ${heapSort(arr)}`);
+console.log(`Original : ${value}`)
+console.log(`Heap Sorted : ${heapSort(value)}`);
