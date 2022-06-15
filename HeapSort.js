@@ -3,10 +3,10 @@ function heapSort(arr) {
     let a = [...arr];
     let len = a.length;
 
-    // 힙에서 큰값과, 작은값 비교
+    // 힙에서 큰값과, 작은값 비교 후 최대 힙 성질에 적합하게 재배치
     const heapify = (a, i) => {
-        const small = 2 * i + 1; // 작은 값(왼쪽)
-        const large = 2 * i + 2; // 큰 값(오른쪽)
+        const small = 2 * i + 1;
+        const large = 2 * i + 2;
         let largest = i;
         
         // 작은수 검사
@@ -27,8 +27,9 @@ function heapSort(arr) {
 
     }; // heapify
 
-    // Math.floor와 반복문으로 배열에서 최대 힙 제작
-    for(let i = Math.floor(len / 2); i >= 0; i-=1){
+    // 반복문으로 배열에서 최대 힙 제작 (배열의 중간 인덱스에서 시작)
+    // Math.floor을 사용해서 배열에 인덱스가 홀수인 경우에도 반올림 해서 중간 인덱스 지정
+    for(let i = Math.floor(len / 2); i >= 0; i-=1) {
         heapify(a, i);
     }
     
