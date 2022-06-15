@@ -40,6 +40,7 @@ function heapSort(arr) {
         len--;
         heapify(a, 0);
     }
+
     return a;
 };
 

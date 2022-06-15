@@ -29,6 +29,7 @@ function mergeSort(arr) {
         }
 
         // 정렬된 값을 최종 배열에 병합
+        console.log(`왼쪽 : ${arr1}, 오른쪽 : ${arr2}`);
         return resultArr.concat(arr1.slice(arr1Idx), arr2.slice(arr2Idx));
     }
 };
